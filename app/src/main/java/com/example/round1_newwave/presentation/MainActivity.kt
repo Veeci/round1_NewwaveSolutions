@@ -116,10 +116,9 @@ import com.google.android.gms.tasks.Task
 
          fusedLocationClient.lastLocation.addOnCompleteListener { task: Task<Location> ->
              if (task.isSuccessful && task.result != null) {
-                 onSuccess(task.result!!)
-             } else {
-                 // Handle the case where location is not available
-                 // You might want to use another method to get location or handle the error
+                 task.result?.let { location ->
+                     onSuccess(location)
+                 }
              }
          }
      }
